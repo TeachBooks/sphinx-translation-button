@@ -31,4 +31,3 @@ jobs:
       with:
         user: LFroling
         password: ${{ secrets.PYPI_API_TOKEN }}
-        package_glob: 'release-package/*.tar.gz'

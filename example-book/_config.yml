@@ -17,7 +17,7 @@ sphinx:
   extra_extensions:
     - sphinx-translation-button
   config:
-    language: en
+    language: nl
     locale_dirs: ['locale/']
 
 # Define the name of the latex output file for PDF builds

@@ -35,6 +35,8 @@ def copy_buttons(app: Sphinx, exc: None) -> None:
         
         # Copy all files from static to output directory
         copy_asset_file(user_js_file, static_directory)
+        copy_asset_file(package_js_file, static_directory)
+
         print("[sphinx-translation-button] copied files to _static directory.")
         
 def createVariable(file_name: str) -> str:
@@ -54,6 +56,8 @@ def createVariable(file_name: str) -> str:
 
 def setup(app: Sphinx) -> dict[str, str]:
     app.add_js_file('user_translation_button.js')
+    app.add_js_file('package_translation_button.js')
+
     print("added this file", 'user_translation_button.js')
     app.connect('build-finished', copy_buttons)
     return {'parallel_read_safe': True, 'parallel_write_safe': True}

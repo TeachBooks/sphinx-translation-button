@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '**.toml'
+      - 'release-package/**.toml'
 
 permissions:
   contents: read

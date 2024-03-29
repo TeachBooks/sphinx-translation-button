@@ -32,4 +32,4 @@ jobs:
       with:
         user: LFroling
         password: ${{ secrets.PYPI_API_TOKEN }}
-        distribution_file: release-package/*.tar.gz
+        packages_dir: release-package

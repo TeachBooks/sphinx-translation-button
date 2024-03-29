@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphinx-translation-button"
+version = "1.0.0"
+readme = "README.md"
+description = "manage translations of a book using a launchbuttons "
+dependencies = [
+    "sphinx",
+    "yaml"
+]
+requires-python = ">=3.9"
+
+

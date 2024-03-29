@@ -9,7 +9,7 @@ readme = "README.md"
 description = "manage translations of a book using a launchbuttons "
 dependencies = [
     "sphinx",
-    "yaml"
+    "PyYAML"
 ]
 requires-python = ">=3.9"
 

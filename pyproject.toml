@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sphinx-translation-button"
-version = "1.0.0"
+version = "1.0.1"
 readme = "README.md"
 description = "manage translations of a book using a launchbuttons "
 dependencies = [

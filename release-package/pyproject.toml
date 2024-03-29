@@ -6,10 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "sphinx-translation-button"
 version = "1.0.6"
 description = "Manage translations of a book using a launchbuttons"
+readme = "README.md"
 dependencies = ["sphinx", "PyYAML"]
 requires-python = ">=3.9"
 
 [sdist]
 include = ["src/sphinx-translation-button/static/*.js"]
-exclude = ["README.md"]
 

@@ -13,4 +13,6 @@ dependencies = [
 ]
 requires-python = ">=3.9"
 
+[tool.setuptools.sdist]
+include = ["src/sphinx-translation-button/static/*.js"]
 

@@ -31,7 +31,7 @@ jobs:
             relative_path="${file#$SRC_FOLDER_PATH/}"
             # Copy the file to the current directory
             echo "$file"
-            echo "./$relative_path
+            echo "./$relative_path"
             # Create directory structure if it doesn't exist
             mkdir -p "$(dirname "./$relative_path")"
             cp "$file" "./$relative_path"

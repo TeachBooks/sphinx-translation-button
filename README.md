@@ -1,2 +1,2 @@
-# sphinx-translation-button
-Add a custom launch button to a jupyter-book which allows switching between translations. 
+# Sphinx-translation-button 
+Switch between languages in a jupyter-book using a launch button

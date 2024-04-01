@@ -13,14 +13,11 @@ jobs:
           SRC_FOLDER_PATH: 'example-book'
           TARGET_BRANCH: 'gh_pages'
         run: |
-          # Use rsync to copy files from the source folder to the target branch
-          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/* ./
+          # Use find to locate all files within the src directory and its subdirectories
+          files=$(find $SRC_FOLDER_PATH -type f)
         
-          # Get the list of files copied
-          files=$(git ls-files)
-        
-          # Print the list of files
-          echo "List of copied files:"
+          # Print the list of files found
+          echo "List of files found:"
           echo "$files"
         
           git config --global user.name 'GitHub Action'
@@ -30,10 +27,14 @@ jobs:
         
           # Iterate over each file and copy them individually
           for file in $files; do
-            git checkout ${GITHUB_REF##*/} -- $file
+            # Get the relative path of the file from the src folder
+            relative_path="${file#$SRC_FOLDER_PATH/}"
+            # Copy the file to the current directory
+            cp "$file" "./$relative_path"
+            # Stage the copied file
+            git add "$relative_path"
           done
         
-          git add -A
           git diff-index --quiet HEAD || git commit -am "deploy files"  # commit to the repository (ignore if no modification)
           git push origin $TARGET_BRANCH # push to remote branch
 

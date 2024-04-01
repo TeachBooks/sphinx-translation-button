@@ -19,7 +19,7 @@ jobs:
         run: git rm -rf .
 
       - name: Copy directory from main to gh-pages
-        run: cp -a example-book/. .
+        run: cp -a ./example-book .
 
       - name: Commit changes
         run: |

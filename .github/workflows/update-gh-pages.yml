@@ -14,7 +14,7 @@ jobs:
           TARGET_BRANCH: 'gh_pages'
         run: |
           # Use rsync to copy files from the source folder to the target branch
-          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/ ./
+          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/* ./
         
           # Get the list of files copied
           files=$(git ls-files)

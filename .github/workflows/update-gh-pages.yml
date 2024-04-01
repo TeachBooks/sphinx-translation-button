@@ -13,9 +13,16 @@ jobs:
           SRC_FOLDER_PATH: 'example-book'
           TARGET_BRANCH: 'gh_pages'
         run: |
-          # Use rsync to copy files while excluding the base directory
-          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/ ./temp/
-          files=$(find ./temp -type f) # get the file list
+          # Use rsync to copy files from the source folder to the target branch
+          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/ ./
+        
+          # Get the list of files copied
+          files=$(git ls-files)
+        
+          # Print the list of files
+          echo "List of copied files:"
+          echo "$files"
+        
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
@@ -29,4 +36,5 @@ jobs:
           git add -A
           git diff-index --quiet HEAD || git commit -am "deploy files"  # commit to the repository (ignore if no modification)
           git push origin $TARGET_BRANCH # push to remote branch
+
 

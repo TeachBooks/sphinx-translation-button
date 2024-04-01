@@ -1,4 +1,4 @@
-name: Copy folder to other branch
+name: Copy build to gh_pages
 
 on: [push]
 

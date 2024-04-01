@@ -18,8 +18,8 @@ jobs:
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
         
-          # Copy all files from source directory to the current directory
-          cp -r "$SRC_FOLDER_PATH"/* ./
+          # Use rsync to copy files from the source directory to the current directory
+          rsync -av --exclude='.*' "$SRC_FOLDER_PATH"/ ./ --relative
         
           # Stage all copied files
           git add .
@@ -27,3 +27,4 @@ jobs:
           # Commit and push changes
           git diff-index --quiet HEAD || git commit -am "Deploy files"  # commit to the repository (ignore if no modification)
           git push origin $TARGET_BRANCH # push to remote branch
+

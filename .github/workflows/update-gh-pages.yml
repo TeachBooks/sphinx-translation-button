@@ -30,6 +30,8 @@ jobs:
             # Get the relative path of the file from the src folder
             relative_path="${file#$SRC_FOLDER_PATH/}"
             # Copy the file to the current directory
+            echo "$file"
+            echo "./$relative_path"
             cp "$file" "./$relative_path"
             # Stage the copied file
             git add "$relative_path"

@@ -13,34 +13,17 @@ jobs:
           SRC_FOLDER_PATH: 'example-book/book/'
           TARGET_BRANCH: 'gh_pages'
         run: |
-          # Use find to locate all files within the src directory and its subdirectories
-          echo "$SRC_FOLDER_PATH"
-          files=$(find "$SRC_FOLDER_PATH" -type f)
-        
-          # Print the list of files found
-          echo "List of files found:"
-          echo "$files"
-        
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
         
-          # Iterate over each file and copy them individually
-          for file in $files; do
-            # Get the relative path of the file from the src folder
-            relative_path="${file#$SRC_FOLDER_PATH/}"
-            # Copy the file to the current directory
-            echo "$file"
-            echo "./$relative_path"
-            # Create directory structure if it doesn't exist
-            mkdir -p "$(dirname "./$relative_path")"
-            cp "$file" "./$relative_path"
-            # Stage the copied file
-            git add "$relative_path"
-          done
+          # Copy all files from source directory to the current directory
+          cp -r "$SRC_FOLDER_PATH"/* ./
         
-          git diff-index --quiet HEAD || git commit -am "deploy files"  # commit to the repository (ignore if no modification)
+          # Stage all copied files
+          git add .
+        
+          # Commit and push changes
+          git diff-index --quiet HEAD || git commit -am "Deploy files"  # commit to the repository (ignore if no modification)
           git push origin $TARGET_BRANCH # push to remote branch
-
-

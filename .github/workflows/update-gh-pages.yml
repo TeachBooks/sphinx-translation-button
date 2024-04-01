@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: copy
         env:
-          SRC_FOLDER_PATH: 'example-book'
+          SRC_FOLDER_PATH: 'example-book/book'
           TARGET_BRANCH: 'gh_pages'
         run: |
           # Use find to locate all files within the src directory and its subdirectories

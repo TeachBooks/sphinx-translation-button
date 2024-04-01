@@ -14,7 +14,7 @@ jobs:
           TARGET_BRANCH: 'gh_pages'
         run: |
           # Use find to locate all files within the src directory and its subdirectories
-          files=$(find $SRC_FOLDER_PATH -type f)
+          files=$(find "$SRC_FOLDER_PATH" -type f)
         
           # Print the list of files found
           echo "List of files found:"

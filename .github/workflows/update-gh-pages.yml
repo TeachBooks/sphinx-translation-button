@@ -1,40 +1,22 @@
-name: Deploy to GitHub Pages
+name: Deploy Site
 
 on:
+  workflow_dispatch:
   push:
+    paths-ignore:
+    - '.github/**' # Ignore changes towards the .github directory
     branches:
-      - main
+    - development # Only trigger on the development branch
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout main branch
+    - name: Perform Checkout
       uses: actions/checkout@v2
-
-    - name: Copy files from example-book/book directory
-      run: |
-        mkdir -p gh_pages_temp
-        cp -r example-book/book/* gh_pages_temp/
-
-    - name: Checkout gh_pages branch
-      run: git checkout gh_pages
-
-    - name: Copy files to gh_pages branch root
-      run: |
-        cp -r gh_pages_temp/* ./
-        rm -rf gh_pages_temp
-
-    - name: Commit changes
-      run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
-        git add .
-        git commit -m "Update GitHub Pages from example-book/book directory"
-        
-    - name: Push changes to gh_pages branch
-      uses: ad-m/github-push-action@master
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh_pages
+        publish_dir: ./example-book
+        publish_branch: gh_pages

@@ -1,30 +1,40 @@
-name: Copy build to gh_pages   
+name: Deploy to GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  copy:
-    name: Copy my folder
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: copy
-        env:
-          SRC_FOLDER_PATH: 'example-book/book'
-          TARGET_BRANCH: 'gh_pages'
-        run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch                         # fetch branches
-          git checkout $TARGET_BRANCH       # checkout to your branch
-        
-          # Use rsync to copy files from the source directory to the current directory
-          rsync -av --exclude='.*' --exclude='__pycache__' "$SRC_FOLDER_PATH"/ ./ --relative
-        
-          # Stage all copied files
-          git add .
-        
-          # Commit and push changes
-          git diff-index --quiet HEAD || git commit -am "Deploy files"  # commit to the repository (ignore if no modification)
-          git push origin $TARGET_BRANCH # push to remote branch
 
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@v2
+
+    - name: Copy files from example-book/book directory
+      run: |
+        mkdir -p gh_pages_temp
+        cp -r example-book/book/* gh_pages_temp/
+
+    - name: Checkout gh_pages branch
+      run: git checkout gh_pages
+
+    - name: Copy files to gh_pages branch root
+      run: |
+        cp -r gh_pages_temp/* ./
+        rm -rf gh_pages_temp
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add .
+        git commit -m "Update GitHub Pages from example-book/book directory"
+        
+    - name: Push changes to gh_pages branch
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh_pages

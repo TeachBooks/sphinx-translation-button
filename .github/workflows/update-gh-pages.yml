@@ -13,8 +13,9 @@ jobs:
           SRC_FOLDER_PATH: 'example-book'
           TARGET_BRANCH: 'gh_pages'
         run: |
-          # Find all files within the src folder excluding the src folder itself
-          files=$(find $SRC_FOLDER_PATH/* -type f)
+          # Use rsync to copy files while excluding the base directory
+          rsync -av --exclude='*' --include='*/' --include='*' $SRC_FOLDER_PATH/ ./temp/
+          files=$(find ./temp -type f) # get the file list
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches

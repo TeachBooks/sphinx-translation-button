@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: copy
         env:
-          SRC_FOLDER_PATH: 'example-book/book/'
+          SRC_FOLDER_PATH: 'example-book/book'
           TARGET_BRANCH: 'gh_pages'
         run: |
           git config --global user.name 'GitHub Action'

@@ -17,10 +17,9 @@ jobs:
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
-          echo "Source folder path: $SRC_FOLDER_PATH"
-
+        
           # Use rsync to copy files from the source directory to the current directory
-          rsync -av --exclude='.*' "$SRC_FOLDER_PATH"/ ./ --relative
+          rsync -av --exclude='.*' --exclude='__pycache__' "$SRC_FOLDER_PATH"/ ./ --relative
         
           # Stage all copied files
           git add .

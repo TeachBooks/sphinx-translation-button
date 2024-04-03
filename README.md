@@ -1,5 +1,5 @@
 # Sphinx-translation-button 
-Switch between languages in a jupyter-book using a launch button
+Switch between languages in a jupyter-book using a launch button (<a href="https://luukfroling.github.io/sphinx-translation-button/nl/_build/html/intro.html"> example </a>)
 
 ## Package
 ### Installation

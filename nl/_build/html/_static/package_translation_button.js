@@ -13,13 +13,19 @@ let _button_data = {
 document.addEventListener('DOMContentLoaded', () => addLanguageSwitch(_button_data, _languages))
 
 const addLanguageSwitch = (button_data, languages) => {
+    
+    // Process link to prevent breaking
+    if(languages[0].length == 2) languages = languages.map(([language, code]) => [language, code, ""]); 
     console.log("[sphinx-translation-button] languages specified: ", languages)
+
     // properly append items to button_data
-    button_data.items = languages.map(([language, code]) => ({ "label": language, "onclick": () => {
-        console.log("[sphinx-translation-button] adding ",language, " with code ", code)
-        // Check current language
-        let currentLanguageCode = languages.find(([language, code]) => window.location.pathname.includes(`/${code}/`))?.[1] || null;
-        currentLanguageCode != null && (window.location.pathname = window.location.pathname.replace(`/${currentLanguageCode}/`, `/${code}/`));
+    button_data.items = languages.map(([language, code, link]) => ({ "label": language, "onclick": () => {
+        if ( link != "" ) {
+            window.location.href = link
+        } else {       
+            let currentLanguageCode = languages.find(([language, code]) => window.location.pathname.includes(`/${code}/`))?.[1] || null;
+            currentLanguageCode != null && (window.location.pathname = window.location.pathname.replace(`/${currentLanguageCode}/`, `/${code}/`));
+        }
     }}))
     addDropdown(button_data)
 }
@@ -68,6 +74,7 @@ let addDropdown = (button) => {
         } else {
             linkItem.innerHTML += "&#x2022;";
         }
+        console.log("[sphinx-translation-button] adding ", b.language, " with code ", b.code, " and link ", b.link)
         if(b.label != undefined) linkItem.innerHTML += " " + b.label;
 
         listItem.appendChild(linkItem);

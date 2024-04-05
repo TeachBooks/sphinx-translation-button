@@ -1,4 +1,4 @@
-let _languages = [['nederlands', 'nl'], ['english', 'en']]
+let _languages = [['nederlands', 'nl', 'www.google.com'], ['english', 'en', 'www.google.com']]
 
 // _languages will be added above this line
 
@@ -15,13 +15,20 @@ let _button_data = {
 document.addEventListener('DOMContentLoaded', () => addLanguageSwitch(_button_data, _languages))
 
 const addLanguageSwitch = (button_data, languages) => {
+    
+    // Process link to prevent breaking
+    if(languages[0].length == 2) languages = languages.map(([language, code]) => [language, code, ""]); 
     console.log("[sphinx-translation-button] languages specified: ", languages)
+
     // properly append items to button_data
-    button_data.items = languages.map(([language, code]) => ({ "label": language, "onclick": () => {
+    button_data.items = languages.map(([language, code, link]) => ({ "label": language, "onclick": () => {
         console.log("[sphinx-translation-button] adding ",language, " with code ", code)
-        // Check current language
-        let currentLanguageCode = languages.find(([language, code]) => window.location.pathname.includes(`/${code}/`))?.[1] || null;
-        currentLanguageCode != null && (window.location.pathname = window.location.pathname.replace(`/${currentLanguageCode}/`, `/${code}/`));
+        if ( link != "" ) {
+            window.location.href = 'link'
+        } else {       
+            let currentLanguageCode = languages.find(([language, code]) => window.location.pathname.includes(`/${code}/`))?.[1] || null;
+            currentLanguageCode != null && (window.location.pathname = window.location.pathname.replace(`/${currentLanguageCode}/`, `/${code}/`));
+        }
     }}))
     addDropdown(button_data)
 }

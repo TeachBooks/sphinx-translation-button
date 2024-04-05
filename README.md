@@ -19,13 +19,13 @@ languages: [["label", country-code], ["nederlands", nl], ["english", en]]
 (based on <a href="https://www.sphinx-doc.org/en/master/usage/advanced/intl.html"> sphinx internationalization </a>)
 For the translation button to work the build output needs to be configured as follows: 
 
-├── book
-│   ├── en
-│   │   ├── (Jupyter-book build english book)
-│   ├── nl
-│   │   ├── (Jupyter-book build dutch book)
-│   ├── country-code
-│   │   ├── (Jupyter-book build in language)
+├── book  
+│   ├── en  
+│   │   ├── (Jupyter-book build english book)  
+│   ├── nl  
+│   │   ├── (Jupyter-book build dutch book)  
+│   ├── country-code  
+│   │   ├── (Jupyter-book build in language)  
 
 ### Example
 A working example can be found <a href="https://luukfroling.github.io/sphinx-translation-button/nl/_build/html/intro.html"> here </a>

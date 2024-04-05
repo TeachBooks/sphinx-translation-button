@@ -43,11 +43,15 @@ def createVariable(file_name: str) -> str:
     # Read yaml file
     with open(file_name, 'r') as file:
         data = yaml.load(file, Loader=yaml.FullLoader)
-        languages = data['languages'] if 'languages' in data else print("[sphinx-translation-button] build failed due to missing languages in _config.yml. Please add languages to _config.yml.")
+        languages = data['languages'] if 'languages' in data else print('\033[91m' + " [sphinx-translation-button] build failed due to missing languages in _config.yml. Please add languages to _config.yml. "+ '\033[0m')
+
+    # check against first language
+    [print('\033[91m' + " [sphinx-translation-button] Not all languages contain all necessery arguments "+ '\033[0m') for language in languages if len(language) != len(languages[0])] 
     
     # Compose result_languages using list comprehension and join
     result_languages = f"let _languages = [{', '.join([f'{language}' for language in languages])}]"
     print("[sphinx-translation-button] adding languages : ", languages)
+    
     return result_languages + "\n\n"
 
    

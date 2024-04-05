@@ -22,9 +22,8 @@ const addLanguageSwitch = (button_data, languages) => {
 
     // properly append items to button_data
     button_data.items = languages.map(([language, code, link]) => ({ "label": language, "onclick": () => {
-        console.log("[sphinx-translation-button] adding ",language, " with code ", code)
         if ( link != "" ) {
-            window.location.href = 'link'
+            window.location.href = link
         } else {       
             let currentLanguageCode = languages.find(([language, code]) => window.location.pathname.includes(`/${code}/`))?.[1] || null;
             currentLanguageCode != null && (window.location.pathname = window.location.pathname.replace(`/${currentLanguageCode}/`, `/${code}/`));
@@ -77,6 +76,7 @@ let addDropdown = (button) => {
         } else {
             linkItem.innerHTML += "&#x2022;";
         }
+        console.log("[sphinx-translation-button] adding ", b.language, " with code ", code, " and link ", b.link)
         if(b.label != undefined) linkItem.innerHTML += " " + b.label;
 
         listItem.appendChild(linkItem);

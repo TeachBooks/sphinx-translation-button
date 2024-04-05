@@ -74,7 +74,7 @@ let addDropdown = (button) => {
         } else {
             linkItem.innerHTML += "&#x2022;";
         }
-        console.log("[sphinx-translation-button] adding ", b.language, " with code ", code, " and link ", b.link)
+        console.log("[sphinx-translation-button] adding ", b.language, " with code ", b.code, " and link ", b.link)
         if(b.label != undefined) linkItem.innerHTML += " " + b.label;
 
         listItem.appendChild(linkItem);

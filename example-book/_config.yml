@@ -41,4 +41,6 @@ html:
   use_issues_button: true
   use_repository_button: true
 
-languages: [["nederlands", nl, "www.google.com"], ["english", en, "www.google.com"]]
+# languages: [["nederlands", nl, "https://www.google.com/"], ["english", en, "https://www.google.com/"]]
+languages: [["nederlands", nl], ["english", en]]
+

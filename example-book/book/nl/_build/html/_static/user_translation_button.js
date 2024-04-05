@@ -1,4 +1,4 @@
-let _languages = [['nederlands', 'nl', 'www.google.com'], ['english', 'en', 'www.google.com']]
+let _languages = [['nederlands', 'nl'], ['english', 'en']]
 
 // _languages will be added above this line
 
@@ -76,7 +76,7 @@ let addDropdown = (button) => {
         } else {
             linkItem.innerHTML += "&#x2022;";
         }
-        console.log("[sphinx-translation-button] adding ", b.language, " with code ", code, " and link ", b.link)
+        console.log("[sphinx-translation-button] adding ", b.language, " with code ", b.code, " and link ", b.link)
         if(b.label != undefined) linkItem.innerHTML += " " + b.label;
 
         listItem.appendChild(linkItem);

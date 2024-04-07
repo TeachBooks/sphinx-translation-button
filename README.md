@@ -25,11 +25,11 @@ For the translation button to work the build output needs to be configured as fo
   - country-code
       - (jupyter-book build in target language)
         
-<b> if using multiple builds </b>
+<b> if using multiple builds at different locations </b>
 
 Add a target link to the languages in the _config.yml
 ```
-languages: [["label", country-code, target], ["nederlands", nl, "dutchbook.nl"], ["english", en, "englishbook.com"]]
+languages: [["label", country-code, target], ["nederlands", nl, "http://dutchbook.nl"], ["english", en, "http://englishbook.com"]]
 ```
 where the different translations of the book are hosted at different locations
 

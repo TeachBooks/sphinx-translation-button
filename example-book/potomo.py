@@ -1,19 +1,24 @@
 import sys
+import os
 from babel.messages.pofile import read_po
 from babel.messages.mofile import write_mo
 
 def compile_po_to_mo(po_file, mo_file):
-    print("here ", po_file)
     with open(po_file, 'rb') as f:
         po = read_po(f)
-    print("2nd")
+
+    if not os.path.exists(os.path.dirname(mo_file)):
+        # If it doesn't exist, create the directory
+        os.makedirs(os.path.dirname(mo_file))
+        print("Directory created:", os.path.dirname(mo_file))
+    else:
+        print("Directory already exists:", os.path.dirname(mo_file))
     with open(mo_file, 'w+b') as f:
         write_mo(f, po)
-    print("last")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python compile_po_to_mo.py <po_file> <mo_file>")
+        print("[Translator3000] Usage: python compile_po_to_mo.py <po_file> <mo_file>")
         sys.exit(1)
 
     po_file = sys.argv[1]

@@ -7,8 +7,12 @@ def compile_po_to_mo(po_file, mo_file):
     with open(po_file, 'rb') as f:
         po = read_po(f)
 
-    os.makedirs(os.path.dirname(mo_file))
-
+    if not os.path.exists(os.path.dirname(mo_file)):
+        # If it doesn't exist, create the directory
+        os.makedirs(os.path.dirname(mo_file))
+        print("Directory created:", os.path.dirname(mo_file))
+    else:
+        print("Directory already exists:", os.path.dirname(mo_file))
     with open(mo_file, 'w+b') as f:
         write_mo(f, po)
 
